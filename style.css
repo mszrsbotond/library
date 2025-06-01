@@ -5,22 +5,25 @@
 }
 
 
-html, body{
-    height: 90%;
+html,
+body {
+    height: 142%;
     margin: 0;
-    background-image: url("purple-background.jpg");
-    background-size: cover;
+    background-repeat: no-repeat;
     font-family: dmseriff;
     color: white;
-}
-
-.container {
-    display: flex;
-    height: 100%;
-    width: 100%;
+    background-image: url("purple-background.jpg");
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .landing {
+    display: flex;
+    height: 50%;
+    width: 100%;
+}
+
+.landing-left {
     width: 35%;
     height: 90%;
     padding-left: 7%;
@@ -31,65 +34,110 @@ html, body{
     margin-right: 7%;
 }
 
-.landing > img {
+.landing-left>img {
     height: 20%;
     width: auto;
 }
 
-.landing > p {
-   font-size: 300%;
-   font-weight: bolder;
-   margin-bottom: 0;
+.landing-left>p {
+    font-size: 300%;
+    font-weight: bolder;
+    margin-bottom: 0;
 }
 
-.landing > h3{
+.landing-left>h3 {
     margin-top: 2%;
 }
 
-.landing > button {
+.landing-left>button {
     margin-top: 7%;
     width: 40%;
     height: 7%;
     border-radius: 20px;
-    background-color: rgba(70,70, 70, 0.3);
+    background-color: rgba(70, 70, 70, 0.3);
     color: white;
     font-weight: bolder;
     font-size: 100%;
 }
 
 
-.books {
+.landing-right {
     width: 65%;
 }
 
-.books > img {
+.landing-right>img {
     height: 50%;
 }
 
-.books > img:hover{
-    transform: translateY(10px);
+form {
+    height: 35%;
+    width: 65%;
+    background-color: darkgray;
+    z-index: 1;
+    border-radius: 30px;
+    padding: 3%;
 }
 
-#book1{
-    position: absolute;
-    padding-top: 5%;
-    padding-left: 3%;
+
+.books-page {
+    height: 50%;
+    width: 100%;
 }
 
-#book2{
-    position: absolute;
-    padding-top: 10%;
-    padding-left: 10%;
+.books-page>h1 {
+    text-align: center;
+    margin: 0;
+    padding-top: 3%;
 }
 
-#book3{
-    position: absolute;
-    padding-top: 13%;
-    padding-left: 13%;
+
+.books {
+    height: 92%;
+    padding-left: 7%;
+    padding-right: 7%;
+    display: flex;
+    gap: 4%;
 }
 
-#book4{
+.book {
+    position: relative;
+    height: 40%;
+    width: 15%;
+    transition: transform 0.5s;
+}
+
+.book>img {
+    width: 100%;
+    margin-left: 10%;
+}
+
+.book-text{
     position: absolute;
-    padding-top: 17%;
-    padding-left: 18%;
+    left: 23%;
+    top: 15%;
+    transform: skewY(-10deg);
+    width: 75%;
+    height: 70%;
+    padding-top: 15%;
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+.book-text>.title {
+    color: black;
+    font-size: 150%;
+    text-align: center;
+    margin: 0;
+}
+
+.book-text>.author {
+    
+    color: black;
+    font-size: 80%;
+    text-align: center;
+    margin-top: 0;
+}
+
+.book:hover{
+    transform: scale(1.3) translateY(-3%);
 }
