@@ -7,6 +7,9 @@ else {
     myLibrary = JSON.parse(localStorage.getItem("myLibrary"))
 }
 
+console.log(myLibrary)
+
+
 const body = document.querySelector("body")
 const newBookButton = document.querySelector(".new-book")
 const landingRight = document.querySelector(".landing-right")
@@ -16,10 +19,11 @@ let form = document.createElement("form")
 
 loadBooks()
 
-function Book(title, author, pages, read, currently) {
+function Book(title, author, pages, currStatus) {
     this.title = title
     this.author = author
     this.pages = pages
+    this.currStatus = currStatus
     this.id = crypto.randomUUID()
 }
 
@@ -28,7 +32,21 @@ function addBookToLibrary() {
     let author = document.querySelector(".author-input").value
     let pages = document.querySelector(".pages-input").value
 
-    let newBook = new Book(title, author, pages, read)
+    let reading = document.getElementById("reading")
+    let read = document.getElementById("read")
+    let planned = document.getElementById("planned")
+
+    if(reading.checked){
+        currStatus = "reading"
+    }
+    else if(read.checked){
+        currStatus = "read"
+    }
+    else{
+        currStatus = "planned"
+    }
+
+    let newBook = new Book(title, author, pages, currStatus)
     myLibrary.push(newBook)
 
     let myLibrarySerialized = JSON.stringify(myLibrary)
@@ -80,6 +98,10 @@ function loadBooks() {
 
 // creating all the input field with this structure --> div --> label, input
 // the label and input gets added to the div and the div gets added to the form
+
+let closeForm = document.createElement("button")
+closeForm.textContent = "X"
+closeForm.classList.add("close")
 
 // title input
 let titleContainer = document.createElement("div")
@@ -191,6 +213,7 @@ submitContainer.appendChild(submit)
 
 
 // append everything to the form
+form.appendChild(closeForm)
 form.appendChild(titleContainer)
 form.appendChild(authorContainer)
 form.appendChild(pagesContainer)
@@ -222,6 +245,11 @@ newBookButton.addEventListener("click", () => {
         event.preventDefault()
         addBookToLibrary()
         loadBooks()
+        landingRight.removeChild(form)
+        form.reset()
+    })
+
+    document.querySelector(".close").addEventListener("click", () => {
         landingRight.removeChild(form)
         form.reset()
     })
