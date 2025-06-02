@@ -20,8 +20,6 @@ function Book(title, author, pages, read, currently) {
     this.title = title
     this.author = author
     this.pages = pages
-    this.read = read
-    this.currently = currently
     this.id = crypto.randomUUID()
 }
 
@@ -29,7 +27,6 @@ function addBookToLibrary() {
     let title = document.querySelector(".title-input").value
     let author = document.querySelector(".author-input").value
     let pages = document.querySelector(".pages-input").value
-    let read = document.querySelector("input[name='read']:checked").value
 
     let newBook = new Book(title, author, pages, read)
     myLibrary.push(newBook)
@@ -93,6 +90,7 @@ titleLabel.htmlFor = "title"
 let titleInput = document.createElement("input")
 titleInput.id = "title"
 titleInput.className = "title-input"
+titleInput.required = true
 
 titleContainer.appendChild(titleLabel)
 titleContainer.appendChild(titleInput)
@@ -107,6 +105,7 @@ authorLabel.htmlFor = "author"
 let authorInput = document.createElement("input")
 authorInput.id = "author"
 authorInput.className = "author-input"
+authorInput.required = true
 
 authorContainer.appendChild(authorLabel)
 authorContainer.appendChild(authorInput)
@@ -122,115 +121,71 @@ let pagesInput = document.createElement("input")
 pagesInput.id = "pages"
 pagesInput.type = "number"
 pagesInput.className = "pages-input"
+pagesInput.required = true
 
 pagesContainer.appendChild(pagesLabel)
 pagesContainer.appendChild(pagesInput)
 
+// stats
+// currently reading / planned / read
 
-// read input
-let readContainer = document.createElement("div")
-readContainer.className = "read-container"
+let statusDiv = document.createElement("div")
+statusDiv.classList.add("status")
 
-let readContainerInput = document.createElement("div")
-readContainerInput.className = "read-container-input"
+let statusTitle = document.createElement("h3")
+statusTitle.textContent = "Status"
 
-let readText = document.createElement("h3")
-readText.textContent = "Have you already read this book?"
+let statusButtons = document.createElement("div")
+statusButtons.classList.add("status-buttons")
 
-let readContainerYes = document.createElement("div")
-readContainerYes.className = "read-container-yes"
+// reading
+let readingButtonInput = document.createElement("input")
+readingButtonInput.type = "radio"
+readingButtonInput.name = "status"
+readingButtonInput.id = "reading"
 
-let readContainerNo = document.createElement("div")
-readContainerNo.className = "read-container-no"
+let readingButtonLabel = document.createElement("label")
+readingButtonLabel.htmlFor = "reading"
+readingButtonLabel.textContent = "Reading"
 
-let readLabelYes = document.createElement("label")
-readLabelYes.textContent = "Yes"
-readLabelYes.htmlFor = "yes"
-let readLabelNo = document.createElement("label")
-readLabelNo.textContent = "No"
-readLabelNo.htmlFor = "no"
+// planned
+let plannedButtonInput = document.createElement("input")
+plannedButtonInput.type = "radio"
+plannedButtonInput.name = "status"
+plannedButtonInput.id = "planned"
 
+let plannedButtonLabel = document.createElement("label")
+plannedButtonLabel.htmlFor = "planned"
+plannedButtonLabel.textContent = "Planned"
 
-let readInputYes = document.createElement("input")
-readInputYes.id = "yes"
-readInputYes.type = "radio"
-readInputYes.name = "read"
-readInputYes.value = "yes"
-let readInputNo = document.createElement("input")
-readInputNo.id = "no"
-readInputNo.type = "radio"
-readInputNo.name = "read"
-readInputNo.value = "no"
+// read
+let readButtonInput = document.createElement("input")
+readButtonInput.type = "radio"
+readButtonInput.name = "status"
+readButtonInput.id = "read"
 
-
-readContainerYes.appendChild(readLabelYes)
-readContainerYes.appendChild(readInputYes)
-
-readContainerNo.appendChild(readLabelNo)
-readContainerNo.appendChild(readInputNo)
-
-readContainerInput.appendChild(readContainerYes)
-readContainerInput.appendChild(readContainerNo)
-
-readContainer.appendChild(readText)
-readContainer.appendChild(readContainerInput)
+let readButtonLabel = document.createElement("label")
+readButtonLabel.htmlFor = "read"
+readButtonLabel.textContent = " Read"
 
 
-
-// currently input
-let currentlyContainer = document.createElement("div")
-currentlyContainer.className = "currently-container"
-
-let currentlyContainerInput = document.createElement("div")
-currentlyContainerInput.className = "currently-container-input"
-
-let currentlyText = document.createElement("h3")
-currentlyText.textContent = "Are you currently reading this book?"
-
-let currentlyContainerYes = document.createElement("div")
-currentlyContainerYes.className = "currently-container-yes"
-
-let currentlyContainerNo = document.createElement("div")
-currentlyContainerNo.className = "currently-container-no"
-
-let currentlyLabelYes = document.createElement("label")
-currentlyLabelYes.textContent = "Yes"
-currentlyLabelYes.htmlFor = "yes"
-let currentlyLabelNo = document.createElement("label")
-currentlyLabelNo.textContent = "No"
-currentlyLabelNo.htmlFor = "no"
+statusButtons.appendChild(readingButtonInput)
+statusButtons.appendChild(readingButtonLabel)
+statusButtons.appendChild(readButtonInput)
+statusButtons.appendChild(readButtonLabel)
+statusButtons.appendChild(plannedButtonInput)
+statusButtons.appendChild(plannedButtonLabel)
 
 
-let currentlyInputYes = document.createElement("input")
-currentlyInputYes.id = "yes"
-currentlyInputYes.type = "radio"
-currentlyInputYes.name = "currently"
-currentlyInputYes.value = "yes"
-let currentlyInputNo = document.createElement("input")
-currentlyInputNo.id = "no"
-currentlyInputNo.type = "radio"
-currentlyInputNo.name = "currently"
-currentlyInputNo.value = "no"
-
-
-currentlyContainerYes.appendChild(currentlyLabelYes)
-currentlyContainerYes.appendChild(currentlyInputYes)
-
-currentlyContainerNo.appendChild(currentlyLabelNo)
-currentlyContainerNo.appendChild(currentlyInputNo)
-
-currentlyContainerInput.appendChild(currentlyContainerYes)
-currentlyContainerInput.appendChild(currentlyContainerNo)
-
-currentlyContainer.appendChild(currentlyText)
-currentlyContainer.appendChild(currentlyContainerInput)
-
+statusDiv.appendChild(statusTitle)
+statusDiv.appendChild(statusButtons)
 
 // submit
 let submitContainer = document.createElement("div")
 submitContainer.className = "submit"
 let submit = document.createElement("input")
 submit.type = "submit"
+submit.value = "Add Book"
 
 submitContainer.appendChild(submit)
 
@@ -239,14 +194,30 @@ submitContainer.appendChild(submit)
 form.appendChild(titleContainer)
 form.appendChild(authorContainer)
 form.appendChild(pagesContainer)
-form.appendChild(readContainer)
-form.appendChild(currentlyContainer)
+form.appendChild(statusDiv)
 form.appendChild(submitContainer)
 
 // new button clicked --> input form --> add Book
 newBookButton.addEventListener("click", () => {
     landingRight.innerHTML = ""
     landingRight.appendChild(form)
+    const formElements = document.querySelectorAll("form > div")
+    formElements.forEach(formElement => {
+        formElement.addEventListener("input", () => {
+            if (form.checkValidity()) {
+                submit.style["background-color"] = "rgba(51, 35, 132, 1)"
+                submit.style["color"] = "white"
+                submit.classList.add("submit-hover")
+                submit.classList.add("submit-active")
+            }
+            else {
+                submit.style["background-color"] = "rgba(201, 201, 201, 0.1)"
+                submit.style["color"] = "rgba(70, 70, 70, 0.3)"
+                submit.classList.remove("submit-hover")
+                submit.classList.remove("submit-active")
+            }
+        })
+    })
     document.querySelector("form").addEventListener("submit", function (event) {
         event.preventDefault()
         addBookToLibrary()
