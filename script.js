@@ -131,12 +131,25 @@ pagesContainer.appendChild(pagesInput)
 let readContainer = document.createElement("div")
 readContainer.className = "read-container"
 
+let readContainerInput = document.createElement("div")
+readContainerInput.className = "read-container-input"
+
+let readText = document.createElement("h3")
+readText.textContent = "Have you already read this book?"
+
+let readContainerYes = document.createElement("div")
+readContainerYes.className = "read-container-yes"
+
+let readContainerNo = document.createElement("div")
+readContainerNo.className = "read-container-no"
+
 let readLabelYes = document.createElement("label")
 readLabelYes.textContent = "Yes"
 readLabelYes.htmlFor = "yes"
 let readLabelNo = document.createElement("label")
 readLabelNo.textContent = "No"
 readLabelNo.htmlFor = "no"
+
 
 let readInputYes = document.createElement("input")
 readInputYes.id = "yes"
@@ -149,15 +162,36 @@ readInputNo.type = "radio"
 readInputNo.name = "read"
 readInputNo.value = "no"
 
-readContainer.appendChild(readLabelYes)
-readContainer.appendChild(readLabelNo)
-readContainer.appendChild(readInputYes)
-readContainer.appendChild(readInputNo)
+
+readContainerYes.appendChild(readLabelYes)
+readContainerYes.appendChild(readInputYes)
+
+readContainerNo.appendChild(readLabelNo)
+readContainerNo.appendChild(readInputNo)
+
+readContainerInput.appendChild(readContainerYes)
+readContainerInput.appendChild(readContainerNo)
+
+readContainer.appendChild(readText)
+readContainer.appendChild(readContainerInput)
+
 
 
 // currently input
 let currentlyContainer = document.createElement("div")
 currentlyContainer.className = "currently-container"
+
+let currentlyContainerInput = document.createElement("div")
+currentlyContainerInput.className = "currently-container-input"
+
+let currentlyText = document.createElement("h3")
+currentlyText.textContent = "Are you currently reading this book?"
+
+let currentlyContainerYes = document.createElement("div")
+currentlyContainerYes.className = "currently-container-yes"
+
+let currentlyContainerNo = document.createElement("div")
+currentlyContainerNo.className = "currently-container-no"
 
 let currentlyLabelYes = document.createElement("label")
 currentlyLabelYes.textContent = "Yes"
@@ -165,6 +199,7 @@ currentlyLabelYes.htmlFor = "yes"
 let currentlyLabelNo = document.createElement("label")
 currentlyLabelNo.textContent = "No"
 currentlyLabelNo.htmlFor = "no"
+
 
 let currentlyInputYes = document.createElement("input")
 currentlyInputYes.id = "yes"
@@ -177,10 +212,18 @@ currentlyInputNo.type = "radio"
 currentlyInputNo.name = "currently"
 currentlyInputNo.value = "no"
 
-currentlyContainer.appendChild(currentlyLabelYes)
-currentlyContainer.appendChild(currentlyLabelNo)
-currentlyContainer.appendChild(currentlyInputYes)
-currentlyContainer.appendChild(currentlyInputNo)
+
+currentlyContainerYes.appendChild(currentlyLabelYes)
+currentlyContainerYes.appendChild(currentlyInputYes)
+
+currentlyContainerNo.appendChild(currentlyLabelNo)
+currentlyContainerNo.appendChild(currentlyInputNo)
+
+currentlyContainerInput.appendChild(currentlyContainerYes)
+currentlyContainerInput.appendChild(currentlyContainerNo)
+
+currentlyContainer.appendChild(currentlyText)
+currentlyContainer.appendChild(currentlyContainerInput)
 
 
 // submit
