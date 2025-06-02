@@ -1,21 +1,27 @@
 var myLibrary;
 
-if(JSON.parse(localStorage.getItem("myLibrary")) == null){
+if (JSON.parse(localStorage.getItem("myLibrary")) == null) {
     myLibrary = []
 }
-else{
+else {
     myLibrary = JSON.parse(localStorage.getItem("myLibrary"))
 }
 
+const body = document.querySelector("body")
+const newBookButton = document.querySelector(".new-book")
+const landingRight = document.querySelector(".landing-right")
+let booksDiv = document.querySelector(".books")
+// create a form container
+let form = document.createElement("form")
+
 loadBooks()
 
-function Book(title, author, pages, read, currently, image) {
+function Book(title, author, pages, read, currently) {
     this.title = title
     this.author = author
     this.pages = pages
     this.read = read
     this.currently = currently
-    this.image = image
     this.id = crypto.randomUUID()
 }
 
@@ -24,9 +30,8 @@ function addBookToLibrary() {
     let author = document.querySelector(".author-input").value
     let pages = document.querySelector(".pages-input").value
     let read = document.querySelector("input[name='read']:checked").value
-    let image = document.querySelector(".image-input").files[0]
 
-    let newBook = new Book(title, author, pages, read, image)
+    let newBook = new Book(title, author, pages, read)
     myLibrary.push(newBook)
 
     let myLibrarySerialized = JSON.stringify(myLibrary)
@@ -36,15 +41,15 @@ function addBookToLibrary() {
 
 function loadBooks() {
 
+    booksDiv.innerHTML = ""
+
     myLibrary.forEach((item) => {
         let title = item["title"]
         let author = item["author"]
         let pages = item["pages"]
         let read = item["read"]
         let currently = item["currently"]
-        let image = item["image"]
 
-        let booksDiv = document.querySelector(".books")
 
         let bookDiv = document.createElement("div")
         bookDiv.classList.add("book")
@@ -74,12 +79,7 @@ function loadBooks() {
     })
 }
 
-const body = document.querySelector("body")
-const newBookButton = document.querySelector(".new-book")
-const landingRight = document.querySelector(".landing-right")
 
-// create a form container
-let form = document.createElement("form")
 
 // creating all the input field with this structure --> div --> label, input
 // the label and input gets added to the div and the div gets added to the form
@@ -183,22 +183,6 @@ currentlyContainer.appendChild(currentlyInputYes)
 currentlyContainer.appendChild(currentlyInputNo)
 
 
-// image upload
-let imageContainer = document.createElement("div")
-imageContainer.className = "image-container"
-let imageLabel = document.createElement("label")
-imageLabel.htmlFor = "img-upload"
-imageLabel.textContent = "Upload Image"
-let imageInput = document.createElement("input")
-imageInput.id = "img-upload"
-imageInput.type = "file"
-imageInput.accept = "image/png, image/jpeg"
-imageInput.className = "image-input"
-
-imageContainer.appendChild(imageLabel)
-imageContainer.appendChild(imageInput)
-
-
 // submit
 let submitContainer = document.createElement("div")
 submitContainer.className = "submit"
@@ -214,11 +198,11 @@ form.appendChild(authorContainer)
 form.appendChild(pagesContainer)
 form.appendChild(readContainer)
 form.appendChild(currentlyContainer)
-form.appendChild(imageContainer)
 form.appendChild(submitContainer)
 
 // new button clicked --> input form --> add Book
 newBookButton.addEventListener("click", () => {
+    landingRight.innerHTML = ""
     landingRight.appendChild(form)
     document.querySelector("form").addEventListener("submit", function (event) {
         event.preventDefault()
