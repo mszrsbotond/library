@@ -101,14 +101,16 @@ function loadBooks() {
         bookDiv.appendChild(bookTextDiv)
 
         booksDiv.appendChild(bookDiv)
-        if(currStatus == "reading")
-        {
+        if (currStatus == "reading") {
+            let currentlyReadingBookTitle = document.createElement("h1")
             currentlyReadingBook.appendChild(bookDiv)
         }
     })
 }
 
-
+// let currentlyReadingBookTitle = document.createElement("h1")
+// currentlyReadingBookTitle.textContent = "Currently Reading"
+// currentlyReadingBook.appendChild(currentlyReadingBookTitle)
 
 // creating all the input field with this structure --> div --> label, input
 // the label and input gets added to the div and the div gets added to the form
@@ -274,7 +276,7 @@ newBookButton.addEventListener("click", () => {
             let reading = document.getElementById("reading")
 
             if (reading.checked) {
-                if(!inputFields.contains(pagesReadContainer)){
+                if (!inputFields.contains(pagesReadContainer)) {
                     inputFields.appendChild(pagesReadContainer)
                 }
             }
