@@ -7,23 +7,23 @@ else {
     myLibrary = JSON.parse(localStorage.getItem("myLibrary"))
 }
 
-console.log(myLibrary)
-
 
 const body = document.querySelector("body")
 const newBookButton = document.querySelector(".new-book")
 const landingRight = document.querySelector(".landing-right")
+let currentlyReadingBook = document.querySelector(".currently-reading-book")
 let booksDiv = document.querySelector(".books")
 // create a form container
 let form = document.createElement("form")
 
 loadBooks()
 
-function Book(title, author, pages, currStatus) {
+function Book(title, author, pages, currStatus, pagesRead) {
     this.title = title
     this.author = author
     this.pages = pages
     this.currStatus = currStatus
+    this.pagesRead = pagesRead
     this.id = crypto.randomUUID()
 }
 
@@ -36,13 +36,13 @@ function addBookToLibrary() {
     let read = document.getElementById("read")
     let planned = document.getElementById("planned")
 
-    if(reading.checked){
+    if (reading.checked) {
         currStatus = "reading"
     }
-    else if(read.checked){
+    else if (read.checked) {
         currStatus = "read"
     }
-    else{
+    else {
         currStatus = "planned"
     }
 
@@ -57,13 +57,13 @@ function addBookToLibrary() {
 function loadBooks() {
 
     booksDiv.innerHTML = ""
+    currentlyReadingBook.innerHTML = ""
 
     myLibrary.forEach((item) => {
         let title = item["title"]
         let author = item["author"]
+        let currStatus = item["currStatus"]
         let pages = item["pages"]
-        let read = item["read"]
-        let currently = item["currently"]
 
 
         let bookDiv = document.createElement("div")
@@ -83,14 +83,28 @@ function loadBooks() {
         bookAuthor.classList.add("author")
         bookAuthor.textContent = author
 
+        let bookStatus = document.createElement("p")
+        bookStatus.classList.add("status")
+        bookStatus.textContent = currStatus
+
+        let bookPages = document.createElement("p")
+        bookPages.classList.add("pages")
+        bookPages.textContent = pages
+
         bookTextDiv.appendChild(bookTitle)
         bookTextDiv.appendChild(bookAuthor)
+        bookTextDiv.appendChild(bookStatus)
+        bookTextDiv.appendChild(bookPages)
 
 
         bookDiv.appendChild(bookImg)
         bookDiv.appendChild(bookTextDiv)
 
         booksDiv.appendChild(bookDiv)
+        if(currStatus == "reading")
+        {
+            currentlyReadingBook.appendChild(bookDiv)
+        }
     })
 }
 
@@ -99,9 +113,18 @@ function loadBooks() {
 // creating all the input field with this structure --> div --> label, input
 // the label and input gets added to the div and the div gets added to the form
 
+// input-fields
+let inputFields = document.createElement("div")
+inputFields.classList.add("input-fields")
+
+
+// close
 let closeForm = document.createElement("button")
-closeForm.textContent = "X"
 closeForm.classList.add("close")
+let closeFormImg = document.createElement("img")
+closeFormImg.src = "close.svg"
+
+closeForm.appendChild(closeFormImg)
 
 // title input
 let titleContainer = document.createElement("div")
@@ -165,6 +188,7 @@ let readingButtonInput = document.createElement("input")
 readingButtonInput.type = "radio"
 readingButtonInput.name = "status"
 readingButtonInput.id = "reading"
+readingButtonInput.required = true
 
 let readingButtonLabel = document.createElement("label")
 readingButtonLabel.htmlFor = "reading"
@@ -202,6 +226,23 @@ statusButtons.appendChild(plannedButtonLabel)
 statusDiv.appendChild(statusTitle)
 statusDiv.appendChild(statusButtons)
 
+
+// pages read
+let pagesReadContainer = document.createElement("div")
+pagesReadContainer.className = "pagesRead-container"
+let pagesReadLabel = document.createElement("label")
+pagesReadLabel.textContent = "Pages Read"
+pagesReadLabel.htmlFor = "pagesRead"
+let pagesReadInput = document.createElement("input")
+pagesReadInput.id = "pagesRead"
+pagesReadInput.type = "number"
+pagesReadInput.className = "pagesRead-input"
+pagesReadInput.required = true
+
+pagesReadContainer.appendChild(pagesReadLabel)
+pagesReadContainer.appendChild(pagesReadInput)
+
+
 // submit
 let submitContainer = document.createElement("div")
 submitContainer.className = "submit"
@@ -212,12 +253,15 @@ submit.value = "Add Book"
 submitContainer.appendChild(submit)
 
 
-// append everything to the form
-form.appendChild(closeForm)
-form.appendChild(titleContainer)
-form.appendChild(authorContainer)
-form.appendChild(pagesContainer)
-form.appendChild(statusDiv)
+// append everything to the inputfield
+inputFields.appendChild(closeForm)
+inputFields.appendChild(titleContainer)
+inputFields.appendChild(authorContainer)
+inputFields.appendChild(pagesContainer)
+inputFields.appendChild(statusDiv)
+
+// append to form
+form.appendChild(inputFields)
 form.appendChild(submitContainer)
 
 // new button clicked --> input form --> add Book
@@ -227,6 +271,19 @@ newBookButton.addEventListener("click", () => {
     const formElements = document.querySelectorAll("form > div")
     formElements.forEach(formElement => {
         formElement.addEventListener("input", () => {
+            let reading = document.getElementById("reading")
+
+            if (reading.checked) {
+                if(!inputFields.contains(pagesReadContainer)){
+                    inputFields.appendChild(pagesReadContainer)
+                }
+            }
+            else {
+                if (inputFields.contains(pagesReadContainer)) {
+                    inputFields.removeChild(pagesReadContainer)
+                }
+            }
+
             if (form.checkValidity()) {
                 submit.style["background-color"] = "rgba(51, 35, 132, 1)"
                 submit.style["color"] = "white"
@@ -239,6 +296,7 @@ newBookButton.addEventListener("click", () => {
                 submit.classList.remove("submit-hover")
                 submit.classList.remove("submit-active")
             }
+
         })
     })
     document.querySelector("form").addEventListener("submit", function (event) {
@@ -247,10 +305,12 @@ newBookButton.addEventListener("click", () => {
         loadBooks()
         landingRight.removeChild(form)
         form.reset()
+        landingRight.appendChild(currentlyReadingBook)
     })
 
     document.querySelector(".close").addEventListener("click", () => {
         landingRight.removeChild(form)
         form.reset()
+        landingRight.appendChild(currentlyReadingBook)
     })
 })

@@ -74,18 +74,10 @@ body {
     width: 65%;
 }
 
-.currently-reading-book{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.landing-right > h1{
+    text-align: center;
 }
 
-.currently-reading-book>img {
-    height: 50%;
-}
 
 form {
     height: 70%;
@@ -94,7 +86,6 @@ form {
     background: #917BC7;
     background: linear-gradient(90deg, rgba(145, 123, 199, 0.5) 0%, rgba(141, 119, 196, 0.5) 50%, rgba(218, 209, 242, 0.5) 100%);
     border-radius: 30px;
-    padding: 3%;
     margin-top: 10%;
 
     animation-name: form-in;
@@ -102,10 +93,18 @@ form {
     display: flex;
     flex-direction: column;
     border: 1px solid;
+}
+
+.input-fields{
+    height: 80%;
+    width: 95%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
     gap: 5%;
 }
 
-form>div {
+.input-fields > div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,7 +114,7 @@ form>div {
     transition: transform 0.5s;
 }
 
-form>div>input {
+.input-fields > div >input, .submit input{
     background-color: rgba(70, 70, 70, 0.5);
     border-radius: 20px;
     outline: none;
@@ -132,14 +131,11 @@ form>div>input {
 }
 
 .close{
+    width:5%;
+    background-color: rgba(2, 2, 2, 0);
     margin-left: auto;
-    margin-top: -2%;
-    font-family: 'Times New Roman', Times, serif;
-    background-color: rgba(70, 70, 70, 0.5);
-    width: 6%;
-    height: 35%;
     border-radius: 100%;
-    z-index: 1000;
+    z-index: 1;
 }
 
 .close:hover{
@@ -150,13 +146,13 @@ form>div>input {
     margin-top: -10%;
 }
 
-form> div:focus-within{
+.input-fields> div:focus-within{
     transform: scale(1.2);
 }
 
 .status{
     height: 20%;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 .status > h3{
@@ -220,16 +216,15 @@ form> div:focus-within{
 
 .submit{
     font-size: 100%;
-    width: 100%;
-    height: 130%;
+    width: 40%;
+    height: 3rem;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
 }
 
 .submit input{
-    height: 50%;
-    width: 40%;
+    height: 100%;
+    width: 100%;
     color: rgba(70, 70, 70, 0.3);
     background-color: rgba(100, 100, 100, 0);
     border: 3px solid rgba(70, 70, 70, 0.3);
@@ -251,7 +246,7 @@ form> div:focus-within{
     transform: translateX(0.09rem);
 }
 
-.books-page {
+.books-page{
     height: 50%;
     width: 100%;
 }
@@ -262,8 +257,31 @@ form> div:focus-within{
     padding-top: 3%;
 }
 
+.currently-reading-book{
+    width: 95%;
+    height: 95%;
+    display: flex;
+    gap: 4%;
+    flex-wrap: wrap;
+    padding-top: 2%;
+    overflow: scroll;
+    justify-content: center;
+    align-items: center;
+}
 
-.books {
+.currently-reading-book > .book{
+    height: 40%;
+    width: auto;
+}
+
+.currently-reading-book > .book > img{
+    height: 100%;
+}
+
+
+
+
+.books{
     height: 88%;
     padding-left: 7%;
     padding-right: 7%;
@@ -313,6 +331,15 @@ form> div:focus-within{
     font-size: 80%;
     text-align: center;
     margin-top: 0;
+    margin-bottom: 0;
+}
+
+.book-text> .status , .pages{
+    font-size: 90%;
+    text-align: center;
+    color: black;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .book:hover {
