@@ -63,18 +63,25 @@ body {
     width: 40%;
     height: 7%;
     border-radius: 20px;
-    background-color: rgba(70, 70, 70, 0.3);
+    background-color: rgba(130, 110, 196, 1);
     color: white;
     font-weight: bolder;
     font-size: 100%;
+    border: 2px solid rgba(51, 35, 132, 1);
+    transition: transform 0.5s;
 }
 
+.landing-left>button:hover {
+    background-color: rgba(51, 35, 132, 1);
+    border: 2px solid rgba(130, 110, 196, 1);
+    transform: scale(1.2);
+}
 
 .landing-right {
     width: 65%;
 }
 
-.landing-right > h1{
+.landing-right>h1 {
     text-align: center;
 }
 
@@ -95,7 +102,7 @@ form {
     border: 1px solid;
 }
 
-.input-fields{
+.input-fields {
     height: 80%;
     width: 95%;
     padding: 3%;
@@ -104,7 +111,7 @@ form {
     gap: 5%;
 }
 
-.input-fields > div {
+.input-fields>div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -114,7 +121,8 @@ form {
     transition: transform 0.5s;
 }
 
-.input-fields > div >input, .submit input{
+.input-fields>div>input,
+.submit input {
     background-color: rgba(70, 70, 70, 0.5);
     border-radius: 20px;
     outline: none;
@@ -130,36 +138,36 @@ form {
     text-align: center;
 }
 
-.close{
-    width:5%;
+.close {
+    width: 5%;
     background-color: rgba(2, 2, 2, 0);
     margin-left: auto;
     border-radius: 100%;
     z-index: 1;
 }
 
-.close:hover{
+.close:hover {
     cursor: pointer;
 }
 
-.title-container{
+.title-container {
     margin-top: -10%;
 }
 
-.input-fields> div:focus-within{
+.input-fields>div:focus-within {
     transform: scale(1.2);
 }
 
-.status{
+.status {
     height: 20%;
     margin-bottom: 2%;
 }
 
-.status > h3{
+.status>h3 {
     margin: 0
 }
 
-.status-buttons{
+.status-buttons {
     display: flex;
     width: 100%;
     height: 100%;
@@ -172,49 +180,50 @@ form {
     padding-left: 5%;
 }
 
-.status-buttons input{
+.status-buttons input {
     display: none;
 }
 
 .status-buttons label {
-  position: relative;
-  color: white;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 10%;
-  border: 3px solid rgba(70, 70, 70, 0.7);
-  background-color: rgba(145, 124, 199, 0.6);
-  padding: 1.5%;
-  border-radius: 0.5em;
-  height: 60%;
-  width: 100%;
-  font-style: bolder;
-}
-.status-buttons label:before {
-  content: "";
-  height: 1rem;
-  width: 1rem;
-  border: 3px solid rgba(70, 70, 70, 0.7);
-  border-radius: 50%;
+    position: relative;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10%;
+    border: 3px solid rgba(70, 70, 70, 0.7);
+    background-color: rgba(145, 124, 199, 0.6);
+    padding: 1.5%;
+    border-radius: 0.5em;
+    height: 60%;
+    width: 100%;
+    font-style: bolder;
 }
 
-.status-buttons input[type="radio"]:checked + label:before{
+.status-buttons label:before {
+    content: "";
+    height: 1rem;
+    width: 1rem;
+    border: 3px solid rgba(70, 70, 70, 0.7);
+    border-radius: 50%;
+}
+
+.status-buttons input[type="radio"]:checked+label:before {
     height: 0.5rem;
     width: 0.5rem;
     border: 0.5rem solid white;
     background-color: rgba(51, 35, 132, 1);
 }
 
-.status-buttons input[type="radio"]:checked + label{
+.status-buttons input[type="radio"]:checked+label {
     background-color: rgba(51, 35, 132, 1);
 }
 
-.status-buttons input[type="radio"]:hover + label{
+.status-buttons input[type="radio"]:hover+label {
     transform: scale(1.2);
 }
 
-.submit{
+.submit {
     font-size: 100%;
     width: 40%;
     height: 3rem;
@@ -222,11 +231,11 @@ form {
     margin-right: auto;
 }
 
-.submit input{
+.submit input {
     height: 100%;
     width: 100%;
     color: rgba(70, 70, 70, 0.3);
-    background-color: rgba(100, 100, 100, 0);
+    background-color: rgba(201, 201, 201, 0.1);
     border: 3px solid rgba(70, 70, 70, 0.3);
 
     transition: transform 0.5s;
@@ -241,12 +250,12 @@ form {
     font-weight: bolder;
 }
 
-.submit-active:active{
+.submit-active:active {
     transform: translateY(0.1rem);
     transform: translateX(0.09rem);
 }
 
-.books-page{
+.books-page {
     height: 50%;
     width: 100%;
 }
@@ -257,7 +266,7 @@ form {
     padding-top: 3%;
 }
 
-.currently-reading-book{
+.currently-reading-book {
     width: 95%;
     height: 95%;
     display: flex;
@@ -269,19 +278,19 @@ form {
     align-items: center;
 }
 
-.currently-reading-book > .book{
+.currently-reading-book>.book {
     height: 40%;
     width: auto;
 }
 
-.currently-reading-book > .book > img{
+.currently-reading-book>.book>img {
     height: 100%;
 }
 
 
 
 
-.books{
+.books {
     height: 88%;
     padding-left: 7%;
     padding-right: 7%;
@@ -334,7 +343,8 @@ form {
     margin-bottom: 0;
 }
 
-.book-text> .status , .pages{
+.book-text>.status,
+.pages {
     font-size: 90%;
     text-align: center;
     color: black;
