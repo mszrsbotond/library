@@ -335,4 +335,4 @@ newBookButton.addEventListener("click", () => {
         form.reset()
         landingRight.appendChild(currentlyReadingBook)
     })
-}
+})
