@@ -7,11 +7,11 @@ else {
     myLibrary = JSON.parse(localStorage.getItem("myLibrary"))
 }
 
-
 const body = document.querySelector("body")
 const newBookButton = document.querySelector(".new-book")
 const landingRight = document.querySelector(".landing-right")
 let currentlyReadingBook = document.querySelector(".currently-reading-book")
+
 let booksDiv = document.querySelector(".books")
 // create a form container
 let form = document.createElement("form")
@@ -31,10 +31,11 @@ function addBookToLibrary() {
     let title = document.querySelector(".title-input").value
     let author = document.querySelector(".author-input").value
     let pages = document.querySelector(".pages-input").value
-
     let reading = document.getElementById("reading")
     let read = document.getElementById("read")
     let planned = document.getElementById("planned")
+
+
 
     if (reading.checked) {
         currStatus = "reading"
@@ -46,13 +47,33 @@ function addBookToLibrary() {
         currStatus = "planned"
     }
 
-    let newBook = new Book(title, author, pages, currStatus)
+    let pagesReadInput = document.querySelector(".pages-read-input")
+    var pagesRead;
+
+    if (pagesReadInput == null) {
+        if (currStatus == "read"){
+            pagesRead = pages
+        }
+        else{
+            pagesRead = 0
+        }
+    }
+    else {
+        pagesRead = pagesReadInput.value
+    }
+
+
+
+
+    let newBook = new Book(title, author, pages, currStatus, pagesRead)
     myLibrary.push(newBook)
 
     let myLibrarySerialized = JSON.stringify(myLibrary)
 
     localStorage.setItem("myLibrary", myLibrarySerialized)
 }
+
+
 
 function loadBooks() {
 
@@ -64,6 +85,8 @@ function loadBooks() {
         let author = item["author"]
         let currStatus = item["currStatus"]
         let pages = item["pages"]
+        let pagesRead = item["pagesRead"]
+
 
 
         let bookDiv = document.createElement("div")
@@ -87,14 +110,14 @@ function loadBooks() {
         bookStatus.classList.add("status")
         bookStatus.textContent = currStatus
 
-        let bookPages = document.createElement("p")
-        bookPages.classList.add("pages")
-        bookPages.textContent = pages
+        let pagesContainer = document.createElement("p")
+        pagesContainer.classList.add("pages")
+        pagesContainer.textContent = `${pagesRead} / ${pages}`
 
         bookTextDiv.appendChild(bookTitle)
         bookTextDiv.appendChild(bookAuthor)
         bookTextDiv.appendChild(bookStatus)
-        bookTextDiv.appendChild(bookPages)
+        bookTextDiv.appendChild(pagesContainer)
 
 
         bookDiv.appendChild(bookImg)
@@ -102,15 +125,12 @@ function loadBooks() {
 
         booksDiv.appendChild(bookDiv)
         if (currStatus == "reading") {
-            let currentlyReadingBookTitle = document.createElement("h1")
             currentlyReadingBook.appendChild(bookDiv)
         }
     })
 }
 
-// let currentlyReadingBookTitle = document.createElement("h1")
-// currentlyReadingBookTitle.textContent = "Currently Reading"
-// currentlyReadingBook.appendChild(currentlyReadingBookTitle)
+
 
 // creating all the input field with this structure --> div --> label, input
 // the label and input gets added to the div and the div gets added to the form
@@ -231,14 +251,14 @@ statusDiv.appendChild(statusButtons)
 
 // pages read
 let pagesReadContainer = document.createElement("div")
-pagesReadContainer.className = "pagesRead-container"
+pagesReadContainer.className = "pages-read-container"
 let pagesReadLabel = document.createElement("label")
 pagesReadLabel.textContent = "Pages Read"
-pagesReadLabel.htmlFor = "pagesRead"
+pagesReadLabel.htmlFor = "pages-read"
 let pagesReadInput = document.createElement("input")
-pagesReadInput.id = "pagesRead"
+pagesReadInput.id = "pages-read"
 pagesReadInput.type = "number"
-pagesReadInput.className = "pagesRead-input"
+pagesReadInput.className = "pages-read-input"
 pagesReadInput.required = true
 
 pagesReadContainer.appendChild(pagesReadLabel)
@@ -315,4 +335,4 @@ newBookButton.addEventListener("click", () => {
         form.reset()
         landingRight.appendChild(currentlyReadingBook)
     })
-})
+}

@@ -14,6 +14,26 @@
     }
 }
 
+@keyframes floatFromLeft {
+    from {
+        transform: translateX(-20rem);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes floatFromRight {
+    from {
+        transform: translateX(20rem);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
 html,
 body {
     height: 142%;
@@ -41,6 +61,8 @@ body {
     flex-direction: column;
     align-items: center;
     margin-right: 7%;
+    animation-name: floatFromLeft;
+    animation-duration: 2s;
 }
 
 .landing-left>img {
@@ -75,10 +97,13 @@ body {
     background-color: rgba(51, 35, 132, 1);
     border: 2px solid rgba(130, 110, 196, 1);
     transform: scale(1.2);
+    cursor: pointer;
 }
 
 .landing-right {
     width: 65%;
+    animation-name: floatFromRight;
+    animation-duration: 2s;
 }
 
 .landing-right>h1 {
@@ -96,7 +121,7 @@ form {
     margin-top: 10%;
 
     animation-name: form-in;
-    animation-duration: 2s;
+    animation-duration: 1s;
     display: flex;
     flex-direction: column;
     border: 1px solid;
@@ -343,6 +368,10 @@ form {
     margin-bottom: 0;
 }
 
+.book-text > .status{
+    height: 10%;
+}
+
 .book-text>.status,
 .pages {
     font-size: 90%;
@@ -350,6 +379,7 @@ form {
     color: black;
     margin-top: 0;
     margin-bottom: 0;
+    font-weight: bolder;
 }
 
 .book:hover {
