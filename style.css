@@ -287,8 +287,14 @@ form {
 
 .books-page>h1 {
     text-align: center;
+    padding-top: 2%;
+    background-color: rgba(130, 110, 196, 1);
+    padding-bottom: 2%;
     margin: 0;
-    padding-top: 3%;
+    width: 100%;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .currently-reading-book {
@@ -316,7 +322,7 @@ form {
 
 
 .books {
-    height: 88%;
+    height: 80%;
     padding-left: 7%;
     padding-right: 7%;
     display: flex;
@@ -352,6 +358,8 @@ form {
     padding-right: 8%;
 }
 
+
+
 .book-text>.title {
     color: black;
     font-size: 150%;
@@ -372,8 +380,15 @@ form {
     height: 10%;
 }
 
+.pages{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+}
+
 .book-text>.status,
-.pages {
+.pages-total, .pages-read, .per{
     font-size: 90%;
     text-align: center;
     color: black;

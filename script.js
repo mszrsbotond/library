@@ -51,10 +51,10 @@ function addBookToLibrary() {
     var pagesRead;
 
     if (pagesReadInput == null) {
-        if (currStatus == "read"){
+        if (currStatus == "read") {
             pagesRead = pages
         }
-        else{
+        else {
             pagesRead = 0
         }
     }
@@ -106,19 +106,38 @@ function loadBooks() {
         bookAuthor.classList.add("author")
         bookAuthor.textContent = author
 
-        let bookStatus = document.createElement("p")
-        bookStatus.classList.add("status")
-        bookStatus.textContent = currStatus
-
-        let pagesContainer = document.createElement("p")
+        let pagesContainer = document.createElement("div")
         pagesContainer.classList.add("pages")
-        pagesContainer.textContent = `${pagesRead} / ${pages}`
+
+        let per = document.createElement("p")
+        per.classList.add("per")
+        per.textContent = "/"
+
+        let pagesReadContainer = document.createElement("p")
+        pagesReadContainer.classList.add("pages-read")
+        pagesReadContainer.textContent = pagesRead
+
+        let pagesTotalContainer = document.createElement("p")
+        pagesTotalContainer.classList.add("pages-total")
+        pagesTotalContainer.textContent = pages
+
+        let plusButton = document.createElement("button")
+        plusButton.textContent = "+"
+        plusButton.classList.add("plus-button")
+
+        let minusButton = document.createElement("button")
+        minusButton.textContent = "-"
+        minusButton.classList.add("minus-button")
+
+        pagesContainer.appendChild(minusButton)
+        pagesContainer.appendChild(pagesReadContainer)
+        pagesContainer.appendChild(per)
+        pagesContainer.appendChild(pagesTotalContainer)
+        pagesContainer.appendChild(plusButton)
 
         bookTextDiv.appendChild(bookTitle)
         bookTextDiv.appendChild(bookAuthor)
-        bookTextDiv.appendChild(bookStatus)
         bookTextDiv.appendChild(pagesContainer)
-
 
         bookDiv.appendChild(bookImg)
         bookDiv.appendChild(bookTextDiv)
@@ -334,5 +353,55 @@ newBookButton.addEventListener("click", () => {
         landingRight.removeChild(form)
         form.reset()
         landingRight.appendChild(currentlyReadingBook)
+    })
+})
+
+document.querySelectorAll(".minus-button").forEach((minusButton) => {
+    minusButton.addEventListener("click", (event) => {
+        let currentBook = event.currentTarget.closest(".book-text")
+        let num = currentBook.querySelector(".pages-read").textContent
+        let numInt = parseInt(num) - 1
+        event.currentTarget.closest(".book-text").querySelector(".pages-read").textContent = numInt
+        currentTitle = currentBook.querySelector(".title").textContent
+        myLibrary.forEach((book) => {
+            if(book["title"] == currentTitle){
+                book["pagesRead"] = numInt
+                if(numInt > 0){
+                    book["currStatus"] = "reading"
+                }
+                else if(numInt == 0){
+                    book["currStatus"] = "planned"
+                }
+                else if(numInt == parseInt(book["pages"])){
+                    book["currStatus"] = "read"
+                }
+                localStorage.setItem("myLibrary", JSON.stringify(myLibrary))
+            }
+        })
+    })
+})
+
+document.querySelectorAll(".plus-button").forEach((plusButton) => {
+    plusButton.addEventListener("click", (event) => {
+        let currentBook = event.currentTarget.closest(".book-text")
+        let num = currentBook.querySelector(".pages-read").textContent
+        let numInt = parseInt(num) + 1
+        event.currentTarget.closest(".book-text").querySelector(".pages-read").textContent = numInt
+        currentTitle = currentBook.querySelector(".title").textContent
+        myLibrary.forEach((book) => {
+            if(book["title"] == currentTitle){
+                book["pagesRead"] = numInt
+                if(numInt > 0){
+                    book["currStatus"] = "reading"
+                }
+                else if(numInt == 0){
+                    book["currStatus"] = "planned"
+                }
+                else if(numInt == parseInt(book["pages"])){
+                    book["currStatus"] = "read"
+                }
+                localStorage.setItem("myLibrary", JSON.stringify(myLibrary))
+            }
+        })
     })
 })
