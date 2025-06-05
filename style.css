@@ -409,6 +409,20 @@ form {
     font-weight: bolder;
 }
 
+.delete{
+    position: absolute;
+    left: 10%;
+    top: 80%;
+    width: 10%;
+    height: 10%;
+    padding: 0;
+}
+
+.delete > img{
+    height: 100%;
+    width: auto;
+}
+
 .book-text > .pages > button{
     width: 60%;
     background-color: rgba(130, 110, 196, 1);

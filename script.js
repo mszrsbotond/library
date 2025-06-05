@@ -136,10 +136,19 @@ function loadBooks() {
         pagesContainer.appendChild(per)
         pagesContainer.appendChild(pagesTotalContainer)
         pagesContainer.appendChild(plusButton)
+        
+
+        let deleteButton = document.createElement("button")
+        deleteButton.classList.add("delete")
+        let deleteButtonImg = document.createElement("img")
+        deleteButtonImg.src = "delete.svg"
+
+        deleteButton.appendChild(deleteButtonImg)
 
         bookTextDiv.appendChild(bookTitle)
         bookTextDiv.appendChild(bookAuthor)
         bookTextDiv.appendChild(pagesContainer)
+        bookTextDiv.appendChild(deleteButton)
 
         bookDiv.appendChild(bookImg)
         bookDiv.appendChild(bookTextDiv)
