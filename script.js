@@ -7,6 +7,7 @@ else {
     myLibrary = JSON.parse(localStorage.getItem("myLibrary"))
 }
 
+
 const body = document.querySelector("body")
 const newBookButton = document.querySelector(".new-book")
 const landingRight = document.querySelector(".landing-right")
@@ -147,6 +148,8 @@ function loadBooks() {
         if (currStatus == "reading") {
             currentlyReadingBook.appendChild(bookDiv)
         }
+
+        loadCovers()
     })
 }
 
@@ -350,6 +353,7 @@ newBookButton.addEventListener("click", () => {
 
         })
     })
+    loadCovers()
     document.querySelector("form").addEventListener("submit", function (event) {
         event.preventDefault()
         addBookToLibrary()
