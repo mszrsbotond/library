@@ -17,6 +17,7 @@ let booksDiv = document.querySelector(".books")
 let form = document.createElement("form")
 
 loadBooks()
+loadCovers()
 
 function Book(title, author, pages, currStatus, pagesRead) {
     this.title = title
@@ -149,6 +150,15 @@ function loadBooks() {
     })
 }
 
+function loadCovers() {
+    let bookCovers = document.querySelectorAll(".currently-reading-book > .book > .book-text")
+    bookCovers.forEach((cover) => {
+        let pagesRead = parseInt(cover.querySelector(".pages-read").textContent)
+        let pagesTotal = parseInt(cover.querySelector(".pages-total").textContent)
+        let coverPercentage = (pagesRead / pagesTotal) * 95
+        cover.style.setProperty('--fill-height', `${coverPercentage}%`)
+    })
+}
 
 
 // creating all the input field with this structure --> div --> label, input
@@ -363,16 +373,20 @@ document.querySelectorAll(".minus-button").forEach((minusButton) => {
         let numInt = parseInt(num) - 1
         event.currentTarget.closest(".book-text").querySelector(".pages-read").textContent = numInt
         currentTitle = currentBook.querySelector(".title").textContent
+        let pagesRead = parseInt(currentBook.querySelector(".pages-read").textContent)
+        let pagesTotal = parseInt(currentBook.querySelector(".pages-total").textContent)
+        let coverPercentage = (pagesRead / pagesTotal) * 95
+        currentBook.style.setProperty('--fill-height', `${coverPercentage}%`)
         myLibrary.forEach((book) => {
-            if(book["title"] == currentTitle){
+            if (book["title"] == currentTitle) {
                 book["pagesRead"] = numInt
-                if(numInt > 0){
+                if (numInt > 0) {
                     book["currStatus"] = "reading"
                 }
-                else if(numInt == 0){
+                else if (numInt == 0) {
                     book["currStatus"] = "planned"
                 }
-                else if(numInt == parseInt(book["pages"])){
+                else if (numInt == parseInt(book["pages"])) {
                     book["currStatus"] = "read"
                 }
                 localStorage.setItem("myLibrary", JSON.stringify(myLibrary))
@@ -388,16 +402,20 @@ document.querySelectorAll(".plus-button").forEach((plusButton) => {
         let numInt = parseInt(num) + 1
         event.currentTarget.closest(".book-text").querySelector(".pages-read").textContent = numInt
         currentTitle = currentBook.querySelector(".title").textContent
+        let pagesRead = parseInt(currentBook.querySelector(".pages-read").textContent)
+        let pagesTotal = parseInt(currentBook.querySelector(".pages-total").textContent)
+        let coverPercentage = (pagesRead / pagesTotal) * 95
+        currentBook.style.setProperty('--fill-height', `${coverPercentage}%`)
         myLibrary.forEach((book) => {
-            if(book["title"] == currentTitle){
+            if (book["title"] == currentTitle) {
                 book["pagesRead"] = numInt
-                if(numInt > 0){
+                if (numInt > 0) {
                     book["currStatus"] = "reading"
                 }
-                else if(numInt == 0){
+                else if (numInt == 0) {
                     book["currStatus"] = "planned"
                 }
-                else if(numInt == parseInt(book["pages"])){
+                else if (numInt == parseInt(book["pages"])) {
                     book["currStatus"] = "read"
                 }
                 localStorage.setItem("myLibrary", JSON.stringify(myLibrary))
@@ -405,3 +423,4 @@ document.querySelectorAll(".plus-button").forEach((plusButton) => {
         })
     })
 })
+

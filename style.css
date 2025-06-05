@@ -387,6 +387,18 @@ form {
     gap: 5%;
 }
 
+.currently-reading-book > .book > .book-text::before{
+    content: "";
+    position: absolute;
+    background-color: rgba(188, 145, 223, 1);
+    height: var(--fill-height, 0%);
+    width: 92%;
+    z-index: -1;
+    bottom: 1.5%;
+    left: 3%;
+    transition: height 0.7s ease-out;
+}
+
 .book-text>.status,
 .pages-total, .pages-read, .per{
     font-size: 90%;
@@ -395,6 +407,14 @@ form {
     margin-top: 0;
     margin-bottom: 0;
     font-weight: bolder;
+}
+
+.book-text > .pages > button{
+    width: 60%;
+    background-color: rgba(130, 110, 196, 1);
+    color: white;
+    border: 2px solid rgba(51, 35, 132, 1);
+    border-radius: 20px;
 }
 
 .book:hover {
