@@ -136,7 +136,7 @@ function loadBooks() {
         pagesContainer.appendChild(per)
         pagesContainer.appendChild(pagesTotalContainer)
         pagesContainer.appendChild(plusButton)
-        
+
 
         let deleteButton = document.createElement("button")
         deleteButton.classList.add("delete")
@@ -365,6 +365,7 @@ newBookButton.addEventListener("click", () => {
     loadCovers()
     document.querySelector("form").addEventListener("submit", function (event) {
         event.preventDefault()
+        location.reload()
         addBookToLibrary()
         loadBooks()
         landingRight.removeChild(form)
@@ -437,3 +438,16 @@ document.querySelectorAll(".plus-button").forEach((plusButton) => {
     })
 })
 
+document.querySelectorAll(".delete").forEach((deleteButton) => {
+    deleteButton.addEventListener("click", (event) => {
+        let TitleToDelete = event.currentTarget.closest(".book-text").querySelector(".title").textContent
+        let index = myLibrary.findIndex(book => book.title == TitleToDelete)
+
+        if (index !== -1) {
+            myLibrary.splice(index, 1);
+        }
+        localStorage.setItem("myLibrary", JSON.stringify(myLibrary))
+        loadBooks()
+        location.reload()
+    })
+})
