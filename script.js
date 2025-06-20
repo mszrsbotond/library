@@ -20,13 +20,15 @@ let form = document.createElement("form")
 loadBooks()
 loadCovers()
 
-function Book(title, author, pages, currStatus, pagesRead) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.currStatus = currStatus
-    this.pagesRead = pagesRead
-    this.id = crypto.randomUUID()
+class Book {
+    constructor(title, author, pages, currStatus, pagesRead) {
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.currStatus = currStatus
+        this.pagesRead = pagesRead
+        this.id = crypto.randomUUID()
+    }
 }
 
 function addBookToLibrary() {
